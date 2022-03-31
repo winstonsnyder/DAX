@@ -1,1 +1,8 @@
+Not uncommon to have multiple dates in fact table to join to calendar table (dim)
+Use USERELATIONSHIP to return various related items from Dim Table
 
+Sample:
+Month= CALCULATE (VALUES ( Date[Month] ),USERELATIONSHIP ( Date[Date], 'fact table'[Date2] ))
+
+More here:
+https://community.powerbi.com/t5/Desktop/Calculated-columns-USERELATIONSHIP-or-LOOKUPVALUE/td-p/1197385
