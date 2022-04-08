@@ -6,3 +6,18 @@ Month= CALCULATE (VALUES ( Date[Month] ),USERELATIONSHIP ( Date[Date], 'fact tab
 
 More here:
 https://community.powerbi.com/t5/Desktop/Calculated-columns-USERELATIONSHIP-or-LOOKUPVALUE/td-p/1197385
+
+
+Update 4/8/2022
+This appears to be a better option using MAXX in a Calculated Column:
+
+//In this example, getting a date from a fact table
+//Comparing the date to the FiscalCalendar to return the appropriate FiscalWeek
+//sometable is a fact table with a date field
+Max Date =
+VAR CurrentDate = sometable[Date]
+
+RETURN
+MAXX(
+     FILTER(ALL(FiscalCalendar), FiscalCalendar[Date] = CurrentDate),
+          FiscalCalendar[FiscalWeek])
