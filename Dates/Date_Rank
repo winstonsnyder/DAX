@@ -1,0 +1,2 @@
+//Rank Dates
+Date Rank = RANKX(Table, Table[Date_Field],,ASC, Dense)
