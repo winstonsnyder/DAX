@@ -1,1 +1,81 @@
+/*
+Conditional Drillthrough
+Guy In A Cube
+https://www.youtube.com/watch?v=4Qy-bksqExI
+Tags: Conditional Drillthrough, Drillthrough, Guy In A Cube
+*/
+
+--Drill Button Text
+Drill Button Text = 
+VAR _iscustomercountryandpagefiltered =
+	IF(
+		AND(
+			HASONEFILTER(Customer[Customer Name]),
+			HASONEFILTER('Sales Territory'[SalesTerritoryCountry])
+		),
+		
+		TRUE,
+		FALSE
+	)
+	
+VAR _scustomer = 
+	SELECTEDVALUE(Customer[Customer Name], "All Customers")
+	
+VAR _scountry = all Countries")
+	SELECTEDVALUE ('Sales Territory'[SalesTerritoryCountry], "
+RETURN
+	SWITCH(
+		TRUE(),
+		_iscustomercountryandpagefiltered, "Click here to see sales for " & _scustomer & " in " & _scountry,
+		"Please select a Customer and Country to Drillthrough
+    
+--Drill Navigation
+Drill Navigation = 
+	IF(
+		AND(
+			HASONEFILTER('Sales Terriitory'[SalesTerritoryCountry]),
+			HASONEFILTER(Customer[Customer Name])
+		),
+		"Customer Details",
+		""
+	)
+
+--Drill Button Text With Page
+Drill Button Text With Page = 
+VAR _iscustomercountryandpagefiltered = 
+	IF(
+		AND(
+			AND(
+				HASONEFILTER(Customer[Customer Name],
+				HASONEFILTER('Sales Territory'[SalesTerritoryCountry])
+			),
+			HASONEFILTER(Navigation[Page Name])
+		),
+			TRUE,
+			False
+	)
+VAR _scustomer = 
+	SELECTEDVALUE(Customer[Customer Name],"All Customers")
+VAR _scountry = 
+	SELECTEDVALUE('Sales Territory'[SalesTerritoryCountry], "All Countries")
+RETURN
+	SWITCH(
+		TRUE(),
+		_iscustomercountryandpagefiltered, "Click here to see sales for & _scustomer & " in " & _scountry,
+		"Please select a Customer and Country to Drillthrough"
+	)
+
+--Drill Navigation with Page
+VAR _spage = 
+	SELECTEDVALUE(Navigation[Page name], "")
+RETURN
+	IF(
+		AND(
+			HASONEFILTER('Sales Territory'[SalesTerritoryCountry]),
+			HASONEFILTER(Customer[Customer Name])
+		),
+		_spage
+	)
+
+
 
