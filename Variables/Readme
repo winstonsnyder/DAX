@@ -1,1 +1,35 @@
+Variable DAX = 
+/*
+ * This measure summarizes the table, Table, grouping by [Column] and summing [Column1].
+ * The summarized table is then filtered to values 2 and 3 in [Column1] and then sums up [Column1]
+ *
+ * Winston Snyder
+ * winston.snyder@gmail.com
+ * 10/24/2022
+*/
 
+VAR __summarizedTable =                         //Summarize table by [Column1], summing [Value]
+    SUMMARIZE(
+        R3_Table,
+        R3_Table[Column],
+        "__Value",
+        SUM(R3_Table[Value])
+    )
+VAR __filteredTable =                           //Filter summarized table for 2 and 3
+    FILTER(
+        __summarizedTable,
+        [Column] = 2
+        ||
+        [Column] = 3
+    )
+VAR __sum = 
+    SUMX(
+        __filteredTable,
+        [__Value]
+    )
+RETURN
+    If(
+        __sum < 400,
+        __sum,
+        -1
+    )
