@@ -1,1 +1,21 @@
+/*
+* Single Letter Day and Month Names
+* User zero width space UNICHAR(8203)
+* Daniil Maslyuk
+* https://xxlbi.com/blog/single-letter-day-month-names/
+*/
 
+--Create Calendar
+Calendar = 
+  ADDCOLUMNS(
+    CALENDAR("2021-01-01","2021-01-07"),
+    "Day Name", FORMAT([Date], "dddd"),
+    "Day of Week", WEEKDAY([Date], 2)
+  )
+  
+--Get Single Unique Character for Day of Week
+Day Name Abbr = 
+CONCATENATE(
+  LEFT('Calendar'[Day Name], 1),
+  REPT(UNICHAR(8203), 'Calendar'[Day of Week])
+)
