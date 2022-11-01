@@ -28,6 +28,7 @@ CONCATENATE(
 )
 
 --Get Single Unique Character for Month of Year w Year When Month = 1
+--Calculated Column
 MonthNameAbbr = 
 VAR __MonthNbr = Month('Calendar'[Date])
 VAR __MonthName = FORMAT( Calendar[Date], "MMMM")
