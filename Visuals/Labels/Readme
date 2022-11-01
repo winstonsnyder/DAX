@@ -26,3 +26,19 @@ CONCATENATE(
     LEFT('Calendar'[Month Name], 1),
     REPT(UNICHAR(8203),'Calendar'[Month Nbr]
 )
+
+--Get Single Unique Character for Month of Year w Year When Month = 1
+MonthNameAbbr = 
+VAR __MonthNbr = Month('Calendar'[Date])
+VAR __MonthName = FORMAT( Calendar[Date], "MMMM")
+VAR __Year = FORMAT( Calendar[Date], "YYYY")
+VAR __MonthNameAbbr = CONCATENATE(
+                        LEFT(__MonthName, 1),
+                        REPT(UNICHAR(8203),__MonthNbr)
+                    )
+RETURN
+    IF( 
+        __MonthNbr = 1,
+        CONCATENATE(CONCATENATE(__MonthNameAbbr,UNICHAR(10)),__Year),
+        __MonthNameAbbr
+    )
