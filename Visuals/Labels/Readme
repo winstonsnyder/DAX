@@ -19,3 +19,10 @@ CONCATENATE(
   LEFT('Calendar'[Day Name], 1),
   REPT(UNICHAR(8203), 'Calendar'[Day of Week])
 )
+
+--Get Single Unique Character for Month of Year
+Month Name Abbr = 
+CONCATENATE(
+    LEFT('Calendar'[Month Name], 1),
+    REPT(UNICHAR(8203),'Calendar'[Month Nbr]
+)
