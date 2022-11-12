@@ -1,6 +1,14 @@
-//Calculated Column
+--Calculated Column
 Day Type = 
 IF(
     'Calendar'[DayNumberOfWeek] = 1 || 'Calendar'[DayNumberOfWeek] = 7,
+    "Weekend","Weekday"
+)
+
+--or
+
+Day Type = 
+IF(
+    'Calendar'[DayNumberOfWeek] IN {1,7},
     "Weekend","Weekday"
 )
