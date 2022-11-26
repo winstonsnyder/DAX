@@ -1,0 +1,13 @@
+New Rank = 
+SWITCH(
+    TRUE(),
+    [Pcnt]<=0.1,1,
+    [Pcnt]<=0.2,2,
+    [Pcnt]<=0.3,3,
+    [Pcnt]<=0.4,4,
+    [Pcnt]<=0.5,5,
+    [Pcnt]<=0.6,6,
+    [Pcnt]<=0.7,7,
+    [Pcnt]<=0.8,8,
+    [Pcnt]<=0.9,9,
+    [Pcnt]<=1,10)
