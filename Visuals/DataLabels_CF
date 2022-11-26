@@ -1,1 +1,14 @@
-
+--Conditionally Format Data Label as Red or Green
+CF Labels = 
+VAR __Threshold = 0.5
+VAR __Result =
+Switch(
+    TRUE(),
+    ([ACT] - [BGT]) >= __Threshold,
+    "RGBA(6, 214, 160, 1)", -- GREEN
+    ([ACT] - [BGT]) <= -__Threshold,
+    "RGBA(239, 71, 111, 1)", -- RED
+    "RGBA(0, 0, 0, 0)"
+)
+Return
+__Result
