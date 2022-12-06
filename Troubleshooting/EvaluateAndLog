@@ -1,0 +1,8 @@
+SalesYOY% = 
+VAR __LastYearSales = 
+CALCULATE(
+	[InternetSales],
+	SAMEPERIODLASTYEAR ( 'Date'[Date] }
+)
+RETURN
+IF (NOT ISBLANK( [InternetSales] ), DIVIDE ( [InternetSales] - EvaluateAndLog( __LastYearSales), __LastYearSales ))
