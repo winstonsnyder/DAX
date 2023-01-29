@@ -1,3 +1,8 @@
+/*
+* Use this as a calculated column in a Date Table
+* Sort this column by the month number
+*/
+
 MonthNameAbbr = 
 VAR __MonthNbr = Month('Calendar'[Date])
 VAR __MonthName = FORMAT( Calendar[Date], "MMMM")
