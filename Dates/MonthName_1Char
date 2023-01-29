@@ -1,6 +1,6 @@
 /*
 * Use this as a calculated column in a Date Table
-* Sort this column by the month number
+* Sort this column by the month number column
 */
 
 MonthNameAbbr = 
