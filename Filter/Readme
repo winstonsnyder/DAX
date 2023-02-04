@@ -1,1 +1,14 @@
 
+CALCULATE(
+
+SUM(Table[Column X]),
+
+FILTER(
+
+Table,
+
+Table[Column A] = "Renewal" ||
+
+Table[Column B] = "Needs Alignment")
+
+)
