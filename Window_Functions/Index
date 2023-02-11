@@ -1,0 +1,13 @@
+EVALUATE
+VAR BrandsAndSales = 
+	ADDCOLUMNS(
+		ALL('Product'[Category], 'Product'[Brand] ),
+		"@Sales", Sales[Total Sales]
+		)
+RETURN
+	INDEX(
+		1,
+		BrandsAndSales,
+		ORDERBY( [@Sales], DESC ),
+		PARTITIONBY( 'Product'[Category] )
+	)
