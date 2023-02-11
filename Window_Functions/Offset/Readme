@@ -1,0 +1,31 @@
+EVALUATE
+	VAR DatesAndSales = 
+	FILTER (
+		ADDCOLUMNS(
+			ALL( 'Date'[Date] ),
+			"@Sales", [Total Sales]
+		),
+		[@Sales] > 0
+	)
+RETURN
+	FILTER(
+		DatesAndSales,
+		VAR CurrentDate = 'Date'[Date]
+		VAR PreviousDate =
+			SELECTCOLUMNS (
+				OFFSET(
+					-1,
+					DatesAndSales,
+					ORDERBY( 'Date'[Date], ASC )
+				),
+				'Date'[Date]
+			)
+		Return
+			PreviousDate <> CurrentDate - 1
+	)
+			
+			
+		
+		
+		
+		
