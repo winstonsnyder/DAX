@@ -1,0 +1,2 @@
+		"@Sales", FORMAT(Sales[Total Sales], """US$"" #,0.00")
+		"@Sales", FORMAT(Sales[Total Sales]," #,0.00")
