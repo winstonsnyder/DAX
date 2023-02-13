@@ -1,5 +1,26 @@
 /*
  * Return Sales YOY
+ */
+
+DEFINE
+	MEASURE Sales[Prev Year Sales] = 
+		CALCULATE(
+			[Total Sales],
+			OFFSET(
+				-1,
+				ORDERBY( 'Date'[Year] )
+			)
+		)
+	
+EVALUATE
+	SUMMARIZECOLUMNS(
+		'Date'[Year],
+		"Sales", [Total Sales],
+		"Prev Year Sales", [Prev Year Sales]
+	)
+
+/*
+ * Return Sales YOY
  * 2019 and 2020 only
  */
 
