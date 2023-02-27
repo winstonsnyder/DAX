@@ -1,9 +1,36 @@
 //Color data points if total sales for given data point is greater or less than average
+//Use this on clustered column chart
+//Flip to line chart if needed. Only data points will be red or green
+
 # Sales Dynamic Color data points =
 IF(
 	{#Total Sales] >= [# Monthly Average Sales],
-	"#OF8BOF",
-	"#E73512"
+	"#OF8BOF", //Green
+	"#E73512"  //Red
 	)
   
-  
+//===================================================================================
+// Highlight Max & Min Values
+
+# Max Sales =
+CALCULATE(
+	MAX(Sales[Sales]),
+	ALL(SALES)
+)
+
+# Min Sales =
+CALCULATE(
+	MIN(Sales[Sales]),
+	ALL(SALES)
+)
+
+# Sales Dynamic Color Max Min Bars =
+IF(
+	[# Total Sales] = [# Max Sales], "#0F8BOF"  // Green
+	IF(
+		[# Total Sales] = [# Min Sales], "#E73512", // Red
+		"#OF7ABB"  // Blue
+	)
+)
+// ======================================================================================
+
