@@ -1,0 +1,9 @@
+//Color data points if total sales for given data point is greater or less than average
+# Sales Dynamic Color data points =
+IF(
+	{#Total Sales] >= [# Monthly Average Sales],
+	"#OF8BOF",
+	"#E73512"
+	)
+  
+  
