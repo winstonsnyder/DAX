@@ -12,12 +12,14 @@ IF(
 //===================================================================================
 // Highlight Max & Min Values
 
+// Separate measure
 # Max Sales =
 CALCULATE(
 	MAX(Sales[Sales]),
 	ALL(SALES)
 )
 
+// Separate measure
 # Min Sales =
 CALCULATE(
 	MIN(Sales[Sales]),
