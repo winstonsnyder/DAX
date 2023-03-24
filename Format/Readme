@@ -1,2 +1,14 @@
-		"@Sales", FORMAT(Sales[Total Sales], """US$"" #,0.00")
-		"@Sales", FORMAT(Sales[Total Sales]," #,0.00")
+"@Sales", FORMAT(Sales[Total Sales], """US$"" #,0.00")
+"@Sales", FORMAT(Sales[Total Sales]," #,0.00")
+
+//Format Numbers
+Formatted Result = 
+VAR __Amount = 'Table'[Dollar Amount]
+Return
+SWITCH(
+    TRUE(),
+    __Amount < 1000, FORMAT(__Amount,"$###"),
+    __Amount < 1000000, FORMAT(__Amount,"$#,.0K"),
+    __Amount < 1000000000, FORMAT(__Amount,"$#,,.00M"),
+    __Amount < 1000000000000, FORMAT(__Amount,"$#,,,.0B")
+)
