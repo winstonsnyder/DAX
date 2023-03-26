@@ -1,0 +1,41 @@
+/*
+ * Rolling Sum
+ * BI Consulting Pro
+ * https://www.youtube.com/watch?v=O2zMcL0BZv0
+ * Where 'Date' is a disconnected table
+*/
+
+//Rolling Daily Total
+Rolling Daily Sales = 
+    CALCULATE(
+        [Total Sales],
+        FILTER(
+            Sales,
+            Sales[Date] = [Selected Date]
+        )
+    )
+
+
+//Rolling Monthly Total
+Rolling MTD Sales = 
+  CALCULATE( [Total Sales],
+      FILTER(
+          ALL( Sales[Date] ),
+              Sales[Date] <= [Selected Date] &&
+          MONTH( Sales[Date] ) = MONTH( [Selected Date] ) &&
+          YEAR( Sales[Date] ) = YEAR( [Selected Date] ) &&
+          Sales[Date] <= MAX( Sales[Date] )
+      )
+  )
+  
+  
+  //Rolling Yearly Total
+  Rolling YTD Sales = 
+    CALCULATE([Total Sales],
+        FILTER(
+            ALL( Sales[Date] ),
+            Sales[Date] <= [Selected Date] &&
+            YEAR( Sales[Date] ) = YEAR( [Selected Date] ) &&
+            Sales[Date] <= MAX( Sales[Date] )
+        )
+    )
