@@ -8,12 +8,22 @@
 
 //Rolling Daily Total
 Rolling Daily Sales = 
-    CALCULATE(
-        [Total Sales],
-        FILTER(
-            Sales,
-            Sales[Date] = [Selected Date]
+    IF(ISBLANK(
+        CALCULATE([Daily Sales], 
+            FILTER(
+                'Sales Data', 
+                'Sales Data'[ORDERDATE] = [SELECTED Date]
+            )
         )
+    ),
+    "No Sales", 
+    CALCULATE(
+        [Daily Sales], 
+        FILTER(
+            'Sales Data', 
+            'Sales Data'[ORDERDATE] = [SELECTED Date]
+        )
+    )
     )
 
 
