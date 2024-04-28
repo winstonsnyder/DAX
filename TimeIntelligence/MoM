@@ -1,0 +1,11 @@
+MoM = 
+VAR CuurentValue = SELECTEDMEASURE()
+VAR PreviousValue = 
+CALCULATE(
+    SELECTEDMEASURE(),
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)
