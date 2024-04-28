@@ -1,5 +1,5 @@
 MoM = 
-VAR CuurentValue = SELECTEDMEASURE()
+VAR CurrentValue = SELECTEDMEASURE()
 VAR PreviousValue = 
 CALCULATE(
     SELECTEDMEASURE(),
@@ -9,3 +9,5 @@ CALCULATE(
         MONTH
     )
 )
+RETURN
+CurrentValue - PreviousValue
