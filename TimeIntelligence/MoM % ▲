@@ -1,0 +1,17 @@
+MoM % ▲ = 
+VAR CurrentValue = SELECTEDMEASURE()
+VAR PreviousValue = 
+CALCULATE(
+    SELECTEDMEASURE(),
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)
+VAR DiffValue = CurrentValue - PreviousValue
+RETURN
+DIVIDE(
+    DiffValue,
+    PreviousValue
+)
