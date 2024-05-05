@@ -1,0 +1,7 @@
+QTD = 
+CALCULATE(
+    SELECTEDMEASURE(),
+    DATESQTD(
+        'Calendar Lookup'[Date]
+    )
+)
