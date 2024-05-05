@@ -1,0 +1,9 @@
+Previous Month = 
+CALCULATE(
+    SELECTEDMEASURE(),
+    DATEADD(
+        'Calendar Lookup'[Date],
+        -1,
+        MONTH
+    )
+)
