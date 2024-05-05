@@ -1,0 +1,7 @@
+YTD = 
+CALCULATE(
+    SELECTEDMEASURE(),
+    DATESYTD(
+        'Calendar Lookup'[Date]
+    )
+)
