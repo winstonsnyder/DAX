@@ -1,4 +1,5 @@
 // Cumulative total
+
 Cumulative Total = 
 CALCULATE(
     SUM('Food Inventory'[quantity_sold]),
@@ -7,3 +8,16 @@ CALCULATE(
         'Calendar'[Transaction_Date] <= MAX('Calendar'[Transaction_Date] )
     )
 )
+
+// Overall total
+
+Overall Total = 
+CALCULATE(
+    SUMX(
+        'Sales by Store',
+        'Sales by Store'[unit_price] * 'Sales by Store'[quantity_sold]
+    ),
+    ALL( 'Sales by Store' )
+)
+
+
