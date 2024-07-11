@@ -1,0 +1,9 @@
+// Cumulative total
+Cumulative Total = 
+CALCULATE(
+    SUM('Food Inventory'[quantity_sold]),
+    FILTER(
+        ALL( 'Calendar'[Transaction_Date] ),
+        'Calendar'[Transaction_Date] <= MAX('Calendar'[Transaction_Date] )
+    )
+)
