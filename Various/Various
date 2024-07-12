@@ -20,4 +20,34 @@ CALCULATE(
     ALL( 'Sales by Store' )
 )
 
+// Percent of Total Sales
+
+Percent of Total Sales = 
+VAR __CurrentSales =
+SUMX(
+    'Sales by Store',
+    'Sales by Store'[unit_price] * 'Sales by Store'[quantity_sold]
+)
+
+VAR __AllStoreSales =
+CALCULATE(
+    SUMX( 
+        'Sales by Store',
+        'Sales by Store'[unit_price] * 'Sales by Store'[quantity_sold]
+    ),
+    ALL( 'Sales by Store' )
+)
+
+VAR __Ratio = 
+DIVIDE(
+    __CurrentSales,
+    __AllStoreSales
+)
+
+RETURN
+__Ratio
+
+
+
+
 
