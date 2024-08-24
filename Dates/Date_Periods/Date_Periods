@@ -1,0 +1,137 @@
+Calendar Periods = 
+
+-- By Ivars Krampis-Vanags
+-- https://www.youtube.com/live/0AmWYZoVMvI
+-- Date table name = 'Calendar'[Date] <-- Change as needed
+
+UNION (
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -0, TODAY()-0 ) ,
+        "Period", "Today",
+        "SortIndex", 10
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -1, TODAY()-1 ) ,
+        "Period", "Yesterday",
+        "SortIndex", 20
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -1, TODAY()-0 ) ,
+        "Period", "Since yesterday",
+        "SortIndex", 30
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -7, TODAY() ) ,
+        "Period", "Last 7 days",
+        "SortIndex", 70
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -10, TODAY() ) ,
+        "Period", "Last 10 days",
+        "SortIndex", 80
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() -30, TODAY() ) ,
+        "Period", "Last 30 days",
+        "SortIndex", 83
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -1 ) + 1, TODAY() ) ,
+        "Period", "Current Month",
+        "SortIndex", 200
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -2 ) + 1, TODAY() ) ,
+        "Period", "Starting Last Month",
+        "SortIndex", 205
+    ),
+    ADDCOLUMNS ( DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -4 ) + 1, EOMONTH ( TODAY() , -1 ) + 0 ) ,
+        "Period", "Last 3 Months",
+        "SortIndex", 220
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -4 ) + 1, TODAY() ) ,
+        "Period", "Last 3 Months & current",
+        "SortIndex", 222
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -7 ) + 1, EOMONTH ( TODAY() , -1 ) + 0 ) ,
+        "Period", "Last 6 Months",
+        "SortIndex", 230
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -7 ) + 1, TODAY() ) ,
+        "Period", "Last 6 Months & current",
+        "SortIndex", 232
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -13 ) + 1, EOMONTH ( TODAY() , -1 ) + 0 ) ,
+        "Period", "Last 12 Months",
+        "SortIndex", 236
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], EOMONTH ( TODAY() , -13 ) + 1, TODAY() ) ,
+        "Period", "Last 12 Months & current",
+        "SortIndex", 238
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], DATE ( YEAR ( TODAY() ), 1, 1 ), TODAY() ) ,
+        "Period", "Year to date",
+        "SortIndex", 300
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], DATE ( YEAR ( TODAY() ) -1, 1, 1 ), DATE ( YEAR ( TODAY() ) -1, 12, 31 ) ) ,
+        "Period", "Last year",
+        "SortIndex", 310
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN( 'Calendar'[Date], DATE ( YEAR ( TODAY() ) -1, 1, 1 ), TODAY() ) ,
+        "Period", "Staring last year",
+        "SortIndex", 320
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - WEEKDAY( TODAY(), 2 )+1, TODAY() ) ,
+        "Period", "This week",
+        "SortIndex", 100
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - WEEKDAY( TODAY(), 2 )+1-7, TODAY() - WEEKDAY( TODAY(), 2 ) ) ,
+        "Period", "Last week",
+        "SortIndex", 110
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - WEEKDAY( TODAY(), 2 )+1-7, TODAY() ) ,
+        "Period", "Starting last week",
+        "SortIndex", 120
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - 42 - WEEKDAY( TODAY(), 2 )+1-7, TODAY() ) ,
+        "Period", "Last 6 weeks",
+        "SortIndex", 150
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - 70 - WEEKDAY( TODAY(), 2 )+1-7, TODAY() ) ,
+        "Period", "Last 10 weeks",
+        "SortIndex", 170
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() - 98 - WEEKDAY( TODAY(), 2 )+1-7, TODAY() ) ,
+        "Period", "Last 14 weeks",
+        "SortIndex", 180
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], TODAY() + 1 , MAX('Calendar'[Date]) ) ,
+        "Period", "Future dates",
+        "SortIndex", 990
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], MIN('Calendar'[Date]), TODAY() ) ,
+        "Period", "All till today",
+        "SortIndex", 995
+    ),
+    ADDCOLUMNS ( 
+        DATESBETWEEN ( 'Calendar'[Date], MIN('Calendar'[Date]), MAX('Calendar'[Date]) ) ,
+        "Period", "All dates",
+        "SortIndex", 999
+    )
+)
