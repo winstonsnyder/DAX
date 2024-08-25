@@ -1,1 +1,36 @@
+-- Measures needed to create a Pareto Chart
+-- Sample \\Power BI\My_Demos\Pareto_BestProducts
+
+1. -- Total of something
+
+      Total Sales = SUM(Data[Sales])
+
+2. -- Rank
+
+      Rank = 
+          RANKX(
+              All(Data[Sub-Category]),
+              [Total Sales]
+          )
+
+3. -- Running Total
+
+      Running Total Sales = 
+      CALCULATE(
+          [Total Sales],
+          TOPN([Rank],
+              ALL(Pareto_Data[Sub-Category]),
+              [Total Sales]
+          )
+      )
+
+4. -- Total of All
+
+      Total Sales (ALL) = 
+      CALCULATE(
+          [Total Sales],
+          ALL(Pareto_Data[Sub-Category])
+      )
+
+5. -- 
 
