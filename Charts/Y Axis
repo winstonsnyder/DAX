@@ -1,4 +1,7 @@
 Y1 Max = 
+-- Marco & Alberto
+-- https://www.sqlbi.com/articles/using-dax-to-control-a-chart-range-in-power-bi/
+
 CALCULATE(
     MAXX(
         VALUES(Bookings[Advertiser]),
