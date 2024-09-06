@@ -1,0 +1,8 @@
+Y1 Max = 
+CALCULATE(
+    MAXX(
+        VALUES(Bookings[Advertiser]),
+            [Net Revenue]
+    ),
+    ALLSELECTED(Bookings)
+)
