@@ -1,1 +1,21 @@
+-- Alexis Olson
+-- https://community.fabric.microsoft.com/t5/Desktop/Speed-Up-Cumulative-Calculation/m-p/4134051#M1304089
 
+Cumulative Revenue =
+VAR _Rank = [Rank]
+VAR _CustRev_ =
+    ADDCOLUMNS (
+        ALLSELECTED ( Source[Customer] ),
+        "@NetRev", [Net_Revenue]
+    )
+VAR _TopNRev =
+    SUMX (
+        TOPN ( _Rank, _CustRev_, [@NetRev] ),
+        [@NetRev]
+    )
+RETURN
+    IF (
+        ISINSCOPE ( Source[Customer] ),
+        _TopNRev,
+        [Total Net Revenue]
+    )
