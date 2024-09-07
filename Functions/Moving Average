@@ -1,0 +1,69 @@
+-- Contents
+--     Moving Average
+--     Moving Average Chk
+
+Moving Avg = 
+-- Chandeep Chhabra
+-- https://www.bing.com/videos/riverview/relatedvideo?q=power+bi+chandeep&mid=75586771CA79324E9C9975586771CA79324E9C99&FORM=VIRE
+
+-- Months in scope
+VAR Period =
+    DATESINPERIOD(
+        'Calendar'[Date],
+        MAX('Calendar'[Date]),
+        -[SelectedMonth],
+        MONTH
+    )
+
+-- Sales for months in scope
+VAR TotalSales = 
+    CALCULATE(
+        [Total Sales],
+        Period
+    )
+
+-- Number of months in scope
+VAR Mon = 
+    CALCULATE(
+        DISTINCTCOUNT(
+            'Calendar'[Month]),
+            Period
+        )
+
+RETURN
+    DIVIDE( TotalSales, Mon )
+
+
+Moving Avg Chk = 
+-- Chandeep Chhabra
+-- https://www.bing.com/videos/riverview/relatedvideo?q=power+bi+chandeep&mid=75586771CA79324E9C9975586771CA79324E9C99&FORM=VIRE
+
+VAR Months = 
+    CALCULATETABLE(
+        SUMMARIZE(
+            'Calendar',
+            'Calendar'[Month],
+            'Calendar'[Month Name],
+            'Calendar'[Year]
+        ),
+        DATESINPERIOD(
+            'Calendar'[Date],
+            MAX(Data[Date]),
+            -[SelectedMonth],
+            MONTH
+        )
+    )
+RETURN
+"( " &
+CONCATENATEX(
+    Months,
+    -- 'Calendar'[Year] & "|" & 'Calendar'[Month Name], ", "
+    FORMAT([Total Sales], "0,0"),
+     " + "
+) &
+" ) / " &
+COUNTROWS(Months)
+
+
+
+    
