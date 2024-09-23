@@ -1,0 +1,9 @@
+Display Selected Period(s) = 
+    CALCULATE(  
+        CONCATENATEX(
+            VALUES('Date Table'[QQYY]),
+            'Date Table'[QQYY],
+            UNICHAR(10),
+            " , "
+        )
+    )
