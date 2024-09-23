@@ -1,0 +1,21 @@
+v Table Row Count = 
+
+VAR __Channel = ALLSELECTED(Channel[Channel])
+VAR __Period = ALLSELECTED('Date Table'[QQYY])
+
+VAR __vTable = 
+    SUMMARIZE(
+        Bookings,
+        Bookings[Channel],
+        Bookings[AA Name]
+    )
+
+VAR __vTable2 = 
+    CALCULATETABLE(
+        __vTable,
+        KEEPFILTERS( TREATAS( {__Channel}, Channel[Channel] )),
+        KEEPFILTERS( TREATAS( {__Period}, 'Date Table'[QQYY] ))
+    )
+
+RETURN
+COUNTROWS(__vTable2)
