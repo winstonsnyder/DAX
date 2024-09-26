@@ -1,0 +1,48 @@
+tstTable Rank = 
+
+VAR __vTable10 = 
+    SELECTCOLUMNS(
+        Bookings,
+        "SummarizedDate", Bookings[Date],
+        "Channel", Bookings[Channel],
+        "Entity", Bookings[AA Name],
+        "Total Revenue", [KPI Selected Revenue Value]
+    )
+
+VAR __vTable20 = 
+    GROUPBY(
+        __vTable10,
+        [SummarizedDate],
+        [Channel],
+        [Entity],
+        "@Total Revenue", SUMX( CURRENTGROUP(), [Total Revenue] )
+    )
+
+VAR __vTable25 = 
+    FILTER(
+        __vTable20,
+        YEAR([SummarizedDate]) = 2024 &&
+        MONTH([SummarizedDate]) IN {1,2} &&
+        [Channel] IN { "Premion National", "TEGNA Station" } &&
+        [Entity] <> "Accounting Adjustment"
+    )
+
+VAR __vTable30 = 
+    ADDCOLUMNS(
+        __vTable25,
+        "Rank", RANKX(
+                    FILTER(
+                        __vTable25,
+                        [Channel] = EARLIER( [Channel] ) &&
+                        MONTH( [SummarizedDate] ) = MONTH( EARLIER( [SummarizedDate] ))
+                    ),
+                     [@Total Revenue],
+                     ,
+                     DESC,
+                     Dense
+        )
+    )
+
+
+RETURN
+    __vTable30
