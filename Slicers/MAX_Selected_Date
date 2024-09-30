@@ -1,0 +1,18 @@
+KPI Max Date = 
+
+
+VAR __tbl_Dates =
+    SELECTCOLUMNS(
+        'Date Table',
+        "Date",'Date Table'[Date],
+        "Quarter", 'Date Table'[QQYY]
+    )
+
+VAR __FilterDates = 
+    FILTER(
+        __tbl_Dates,
+        [Quarter] IN ALLSELECTED('Date Table'[QQYY])
+    )
+
+RETURN
+MAXX(__FilterDates, [Date])
