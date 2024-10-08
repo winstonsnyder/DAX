@@ -1,0 +1,46 @@
+--Brian Julius
+--https://www.youtube.com/watch?v=eoT-jPzV3Wk
+
+Spread Revenue with Fixed Totals = 
+
+VAR SelMo =
+    SELECTEDVALUE( Dates[ShortMonth] )
+VAR SelPer =
+    SELECTEDVALUE( Opportunities[Period] )
+VAR vTable =
+    ADDCOLUMNS(
+        CROSSJOIN(
+            VALUES( Opportunities[Period] ),
+            VALUES( Dates[ShortMonth] )
+        ),
+        "@SprRev", [Spread Revenue]
+    )
+VAR TotSpredRev =
+    SWITCH(
+        TRUE(),
+        HASONEVALUE( Opportunities[Period] )
+            && HASONEVALUE( Dates[ShortMonth] ), [Spread Revenue],  //Condition A - base data rows
+        HASONEVALUE( Dates[ShortMonth] ),                           //Condition B - force column totals
+            CALCULATE(
+                SUMX(
+                    vTable,
+                    [@SprRev]
+                ),
+                VALUES( Opportunities[Period] )
+            ),
+        HASONEVALUE( Opportunities[Period] ),                        //Condition C - force row totals
+            CALCULATE(
+                SUMX(
+                    vTable,
+                    [@SprRev]
+                ),
+                VALUES( Dates[ShortMonth] )
+            ),
+                                                                     //Condition D - force grand total
+        SUMX(
+            vTable,
+            [@SprRev]
+        )
+    )
+RETURN
+    TotSpredRev
