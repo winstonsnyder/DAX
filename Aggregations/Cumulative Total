@@ -1,0 +1,12 @@
+-- https://monocroft.com/how-to-create-a-line-chart-with-cumulative-values-in-power-bi/
+
+Cumulative Total = 
+VAR CurrentDate = MAX('financials'[Date])
+RETURN 
+    CALCULATE(
+        SUM('financials'[Units Sold]),
+        FILTER(
+            ALL('financials'[Date]),
+            'financials'[Date] <= CurrentDate
+        )
+    )
