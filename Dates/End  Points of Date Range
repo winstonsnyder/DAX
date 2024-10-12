@@ -1,0 +1,31 @@
+-- This will calculate a measure value at the end points of a date range
+-- Sweatpants BI
+-- https://www.youtube.com/watch?v=-8sq5Vs5ADc
+-- PBIX: \\Power BI\My_Demos\Amit2.pbix
+-- Dependencies : [First Date2], [Last Date2]
+
+End Points =
+
+SWITCH(
+    TRUE(),
+    SELECTEDVALUE( 'Date'[Date] ) = [First Date2], [Measure],
+    SELECTEDVALUE( 'Date'[Date] ) = [Last Date2] , [Measure],
+    BLANK()
+)
+
+--  First Date2 <- A separate measure
+
+First Date2 = 
+    CALCULATE(
+        MIN( Date2[Date] ),
+        ALLSELECTED( Date2 )
+    )
+
+-- Last Date2 <- A separate measure
+
+Last Date2 = 
+    CALCULATE(
+        MAX( Date2[Date] ),
+        ALLSELECTED( Date2 )
+    )
+
