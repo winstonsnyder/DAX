@@ -1,0 +1,27 @@
+Last 12 Months = 
+-- Amit Chandak
+-- https://www.youtube.com/watch?v=44fGGmg9fHI
+-- Use 2nd Date Table - disconnected
+-- Use 2nd Date Table for User Slicer Selection
+
+
+-- Type variant
+-- Create disconnected table for Type
+-- Last 12 Months | -12
+-- Last 6 Months | -6
+-- Last 3 Months | --3
+
+VAR _type = MAXX( ALLSELECTED( 'Type' ), 'Type'[Value] )
+VAR _max = MAXX( ALLSELECTED( Date2 ), Date2[Date] )
+VAR _min = DATE( YEAR( _max ), MONTH( _max ) + _type, DAY( _max )) + 1
+
+
+RETURN
+    CALCULATE(
+        [Net],
+        FILTER(
+            'Date',
+            'Date'[Date] <= _max &&
+            'Date'[Date] >= _min
+        )
+    )
