@@ -1,0 +1,11 @@
+-- https://www.sqlbi.com/articles/introducing-dynamic-format-strings-for-dax-measures/
+VAR CurrentValue = SELECTEDMEASURE()
+RETURN
+    SWITCH (
+        TRUE (),
+        // Special cases to force K and M in the sample report
+        CurrentValue <= 1E3, "#,0.00",
+        CurrentValue <= 1E6, "#,0,.0 K",
+        CurrentValue <= 1E9, "#,0,,.0 M",
+        CurrentValue <= 1E12, "#,0,,,.00 G"
+    )
