@@ -1,0 +1,15 @@
+-- PBIX : Show Last n months on x axis
+-- Slicers use Duplicate Calendar
+-- X axis uses calendar
+-- Inactive relationship on duplicate calendar
+
+Month Values to Plot = 
+    CALCULATE(
+        [Base value, Periodic, SEK],
+        USERELATIONSHIP(f_OneStreamPeriodic[Date],Calendar_dup[Date]),
+        DATESBETWEEN(
+            Calendar_dup[Date],
+            edate(MAX(Calendar_dup[Date]),-13),
+            MAX(Calendar_dup[Date])
+        )
+    )
