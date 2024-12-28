@@ -1,0 +1,53 @@
+8_Reference Label Font Color = 
+
+-- Injae Park
+-- KPI Card Video - Starter
+
+VAR x = [6_SM Date Param Delta] RETURN
+SWITCH(TRUE(),
+    x > 0 , "#038D96", //Green
+    x < 0, "#A84545") // red
+
+
+[6_SM Date Param Delta] :
+6_SM Date Param Delta = 
+[4_SM Date Param] - [4_SM Date Param Past Period]
+
+
+4_SM Date Param = 
+CALCULATE(
+    [3_Selected Measure],
+    KEEPFILTERS(
+        DATESBETWEEN(
+            'Date'[Date],                 
+            [3_Selected Min Date],
+            [2_MaxDate]
+         ))
+    )
+
+
+4_SM Date Param Past Period = 
+CALCULATE(
+    [3_Selected Measure],
+    KEEPFILTERS(
+        DATESBETWEEN(
+            'Date'[Date],       
+            [3_Selected Min Date Past Period],                      
+            [3_Selected Min Date]
+         ))
+    )
+
+
+3_Selected Measure = 
+SWITCH(
+    SELECTEDVALUE('Measure Sel'[Measure Name]),
+    "New Followers", [1_New Followers],
+    "Total Engagements", [1_Total Engagements],
+    "Total Impressions", [1_Total Impressions])
+
+
+1_New Followers = SUM(Data[New followers])
+
+1_Total Engagements = SUM(Data[Engagements])
+
+1_Total Impressions = SUM(Data[Impressions])
