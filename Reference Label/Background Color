@@ -1,0 +1,9 @@
+8_Reference Label Background Color = 
+
+-- Injae Park
+-- KPI Card Video Starter
+
+VAR x = [6_SM Date Param Delta] RETURN
+SWITCH(TRUE(),
+    x > 0 , "#E7F3F5", //Green
+    x < 0, "#F6EDED") // red
